@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FEED</title>
+</head>
+<body onload="">
+    {% block content %}
+    <center>
+        
+        <!--<div id="">'+ " +"+"<br>"+"proof :" +str(g["proof"])+"<br>"+"previous_hash :" +str(g["previous_hash"])+"</p></div> -->
+        <div id="socket">
+            {% for dat in data %}
+            <div id="">
+                <img height="300" src="data:image/png;base64,{{dat.image}}">
+                <p>index :{{dat.index | string}}
+                <br>timestamp : {{dat.timestamp | string}}
+                <br>proof : {{dat.proof | string}}
+                <br>previous hash : {{dat.previous_hash | string}}
+                <br>
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+
+    </center>
+    {% endblock content %}
+</body>
+</html>
