@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login Page</title>
+	<style>
+		/* Global styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #fafafa;
+}
+
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 30px 45px;
+    border-radius: 3px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+header {
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin: 0;
+    color: #262626;
+}
+
+a {
+    color: #ffffff;
+    background-color: #333333;
+    border-radius: 3px;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: bold;
+    display: block;
+    padding: 20px;
+}
+
+form {
+    margin-top: 30px;
+}
+
+label {
+    font-size: 0.9em;
+    color: #999;
+    display: block;
+    margin-bottom: 10px;
+}
+
+input {
+    border: none;
+    background-color: #fafafa;
+    padding: 10px;
+    width: 100%;
+    font-size: 1em;
+    color: #262626;
+    margin-bottom: 20px;
+    border: 1px solid #efefef;
+    border-radius: 3px;
+}
+
+input:focus {
+    outline: none;
+    border: 1px solid #333333;
+}
+
+button {
+    background-color: #333333;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 10px;
+    font-size: 1em;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #38a1f0;
+}
+
+/* Specific styles for Signup page */
+.signup label[for="public-key"] {
+    margin-top: 20px;
+}
+
+.signup button[type="submit"] {
+    background-color: #b2dffc;
+}
+
+.signup button:hover {
+    background-color: #99cefa;
+}
+
+/* Specific styles for Login page */
+.login input[type="password"] {
+    margin-bottom: 0;
+}
+
+.login button[type="submit"] {
+    background-color: #3897f0;
+}
+
+.login button:hover {
+    background-color: #38a1f0;
+}
+.form--hidden{
+	display: none;
+}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<form action="/sing_in/" method="post" id="Login" class="form  form--hidden">
+			<header>
+				<h1>Login</h1><a href="./" id="linkCreateAccount">Sign Up</a>
+			</header>
+			<br>
+			<label for="public-key">Public Key:</label>
+			<input type="text" id="public-key" name="public-key" required>
+			<label for="private-key">Private Key:</label>
+			<input type="password" id="private-key" name="private-key" required>
+			<button onclick="location.href='/sing_in/'" type="submit">Login</button>
+			
+		</form>
+		<forma action="/sing_up/" method="post" id="signup" class="form">
+            {%block h%}
+			<header>
+                <p>{{data.lg}}</p>
+				<h1>Sign Up</h1><a href="./"  id="linksignin">Sign in</a>
+			</header>
+			<br>
+			<label for="public-key">Public Key:</label>
+			<textarea rows='6' cols="65" id="public-key" name="public-key" required>{{data.public_key}}</textarea>
+            <label for="private-key">Private Key:</label>
+            <textarea rows='15' cols="65" id="private-key" name="private-key" required>{{data.private_key}}</textarea>
+			<button onclick="location.href='/sing_up/'" type="submit">Sign Up</button>
+			{%endblock h%}
+		</form>
+	</div>
+	<script>
+		document.addEventListener("DOMContentLoaded", () => {
+		const login=document.querySelector("#Login");
+		const singup=document.querySelector("#signup"); 
+		document.querySelector("#linkCreateAccount").addEventListener("click", e=>{
+        e.preventDefault();
+        login.classList.add("form--hidden");
+        singup.classList.remove("form--hidden");
+    });
+
+    document.querySelector("#linksignin").addEventListener("click", e=>{
+        e.preventDefault();
+        login.classList.remove("form--hidden");
+        singup.classList.add("form--hidden");
+    });
+		});
+	</script>
+</body>
+</html>

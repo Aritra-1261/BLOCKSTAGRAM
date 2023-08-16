@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Blockstastagram</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+    :root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+}
+
+body.dark {
+  --bg-color: #333333;
+  --text-color: #ffffff;
+}
+body {
+    background-color: var(--bg-color);
+  color: var(--text-color);
+	margin: 0;
+	padding: 0;
+	font-family: Arial, sans-serif;
+}
+
+.container {
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 30px;
+}
+
+nav ul {
+	display: flex;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+nav ul li {
+	margin-left: 20px;
+}
+
+nav ul li a {
+	color: var(--text-color);
+	text-decoration: none;
+	font-size: 18px;
+}
+.dark-mode nav ul li a{
+    color: #fff;
+}
+nav ul li a:hover {
+	color: #000;
+    text-decoration: underline;
+}
+.dark-mode nav ul li a:hover {
+	color: #fff;
+    text-decoration: underline;
+}
+
+input[type="text"] {
+	padding: 10px;
+    background-color: #ddd;
+	border: none;
+	border-radius: 20px;
+}
+.search-container {
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 20px;
+  padding: 5px;
+}
+
+.search-container input[type="text"] {
+  border: none;
+  margin-right: 5px;
+}
+
+.search-container button[type="submit"] {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+button[type="submit"] {
+	padding: 10px;
+	background-color: #ddd;
+	color: #333;
+	border: none #fff;
+	border-radius: 20px;
+	cursor: pointer;
+}
+
+button[type="submit"]:hover {
+	background-color: #ccc;
+}
+
+.main {
+	display: flex;
+    flex-direction: column;
+	flex-wrap: wrap;
+    align-items: center;
+}
+
+.post {
+	width: 45%;
+	margin-right: 5%;
+	margin-bottom: 30px;
+}
+
+.post img {
+	width: 100%;
+	height: auto;
+}
+
+.post-info {
+    color: var(--text-color);
+	background-color: #fafafa;
+	padding: 20px;
+}
+
+.post-info h3 {
+	margin-top: 0;
+	margin-bottom: 10px;
+	font-size: 22px;
+}
+
+.post-info p {
+	font-size: 16px;
+	line-height: 1.1;
+	margin-bottom: 20px;
+}
+
+.post-info button {
+	background-color: transparent;
+	border: none;
+	background-color: var(--text-color);
+    color: var(--bg-color);
+	font-size: 16px;
+	border-radius: 5px;
+    cursor: pointer;
+    padding: 5px;
+    margin-right: 5px;
+}
+
+.post-info button:hover {
+	color: #0066cc;
+}
+
+footer {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-top: 30px;
+border-top: 1px solid #ddd;
+padding-top: 20px;
+}
+
+footer ul {
+display: flex;
+list-style: none;
+margin: 0;
+padding: 0;
+}
+
+footer ul li {
+margin-left: 20px;
+}
+
+footer ul li a {
+color: #333;
+text-decoration: none;
+font-size: 16px;
+}
+.dark-mode footer ul li a {
+color: #fff;
+text-decoration: none;
+font-size: 16px;
+}
+footer ul li a:hover {
+color: #0066cc;
+text-decoration: underline;
+}
+
+footer p {
+font-size: 16px;
+color: #333;
+margin: 0;
+}
+.dark-mode footer p {
+font-size: 16px;
+color: #fff;
+margin: 0;
+}
+.mode-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 999;
+  color: #333;
+}
+
+.mode-toggle-label {
+  display: inline-block;
+  cursor: pointer;
+  user-select: none;
+  line-height: 1;
+}
+
+.mode-toggle-checkbox {
+  display: none;
+}
+
+/* Sun icon styles */
+.fa-sun-o {
+  display: inline-block;
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+/* Moon icon styles */
+.fa-moon-o {
+  display: none;
+  font-size: 20px;
+}
+
+/* Dark mode styles */
+.dark-mode {
+  background-color: #333;
+  color: #fff;
+}
+body .dark-mode {
+  background-color: #333;
+  color: #fff;
+}
+
+.dark-mode .mode-toggle-label {
+  color: #fff;
+}
+
+.dark-mode .fa-sun-o {
+  display: none;
+}
+
+.dark-mode .fa-moon-o {
+  display: inline-block;
+}
+.fade-in {
+  opacity: 0;
+  animation: fade-in 2.5s forwards;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+#load-more-btn {
+  background-color: #fff;
+  border: 2px solid #000;
+  color: #000;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+#load-more-btn.dark-mode {
+  background-color: #000;
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+#spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  border: 0.2rem solid rgba(0, 0, 0, 0.2);
+  border-top-color: #000;
+  animation: spin 0.6s linear infinite;
+}
+
+#spinner.dark-mode {
+  border-top-color: #fff;
+}
+
+.hidden {
+  display: none;
+}
+a.login-btn {
+  background-color: #333;
+  color: #fff;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+a.login-btn:hover {
+  background-color: #333;
+  color: #fff;
+  text-decoration: underline;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  #instagram-logo::before {
+    filter: brightness(300%);
+    color: #fff;
+  }
+}
+@media (max-width: 768px) {
+.main {
+flex-direction: column;
+}
+.post {
+	width: 100%;
+	margin-right: 0;
+}
+
+header {
+	flex-wrap: wrap;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+input[type="text"] {
+	width: 100%;
+	margin-top: 20px;
+}
+
+nav {
+	margin-top: 20px;
+	width: 100%;
+}
+
+nav ul {
+	flex-direction: column;
+	align-items: center;
+}
+
+nav ul li {
+	margin: 0;
+	margin-top: 10px;
+}
+
+footer {
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+
+footer ul {
+	margin-top: 20px;
+}
+
+footer ul li {
+	margin: 0;
+	margin-top: 10px;
+}
+}
+
+</style>
+<body>
+	<div class="container">
+		<header>
+			<img src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png" alt="Instagram Logo">
+			<div class="search-container">
+				<input type="text" placeholder="Search">
+				<button type="submit"><i class="fa fa-search"></i></button>
+			</div>
+			<nav>
+				<ul>
+					<li><a href="#">Home</a></li>
+					<li><a href="#">About</a></li>
+                    <li><a href="#" class="login-btn">LogIN/SignUp</a></li>
+				</ul>
+			</nav>
+		</header>
+    {% block content %}
+		<div id="socket" class="main">
+			<div class="post" id="">
+        {% for dat in data %}
+        <img height="300" src="data:image/png;base64,{{dat.image}}" alt="Post Image">
+                <div class="post-info">
+                    <h3>Block Information</h3>
+                    <p>index :{{dat.index | string}}
+                    <br>timestamp : {{dat.timestamp | string}}
+                    <br>proof : {{dat.proof | string}}
+                    <br>previous hash : {{dat.previous_hash | string}}
+                    </p>
+                </div>
+                {% endfor %}
+      </div>
+      
+    </div>
+    {% endblock content %}    
+        </div>
+        <button id="load-more-btn" class="light">Load More</button><div id="spinner" class="hidden"></div>
+        <footer>
+            <ul>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <p>&copy; 2023 Instagram</p>
+        </footer>
+        <div class="mode-toggle">
+            <input type="checkbox" id="toggle" name="toggle" class="mode-toggle-checkbox">
+            <label for="toggle" class="mode-toggle-label">
+                <i class="fa fa-sun-o"></i>
+                <i class="fa fa-moon-o"></i>
+            </label>
+        </div>
+    </div>
+    <script>
+const toggle = document.getElementById('toggle');
+var loadMoreBtn = document.getElementById("load-more-btn");
+const spinner = document.getElementById('spinner');
+toggle.addEventListener('change', function(e) {
+  if (e.target.checked) {
+    document.body.classList.add('dark-mode');
+  } else {
+    document.body.classList.remove('dark-mode');
+  }
+  loadMoreBtn.classList.toggle('dark-mode');
+  spinner.classList.toggle('dark-mode');
+});
+function showSpinner() {
+  spinner.classList.remove('hidden');
+  loadMoreBtn.classList.add('hidden');
+}
+
+function hideSpinner() {
+  spinner.classList.add('hidden');
+  loadMoreBtn.classList.remove('hidden');
+}
+loadMoreBtn.addEventListener('click', () => {
+  showSpinner();
+  setTimeout(() => {
+    hideSpinner();
+  }, 2000);
+});
+const mainDiv = document.querySelector('.main');
+const postElem = document.createElement('div');
+
+postElem.className = 'post fade-in'; 
+mainDiv.appendChild(postElem);
+var index = 3;
+
+loadMoreBtn.addEventListener("click", function() {
+    spinner.classList.remove("hidden");
+    var mainDiv = document.querySelector(".main");
+    for (var i = 0; i < 2; i++) {
+        var newDiv = document.createElement("div");
+        newDiv.className = "post fade-in";
+        newDiv.id = "obj" + index;
+        newDiv.innerHTML = `
+        
+        `;
+        
+        mainDiv.appendChild(newDiv);
+        index++;
+    }
+    setTimeout(function() {
+        spinner.classList.add("hidden");
+        const newPosts = document.querySelectorAll('.post.fade-in');
+        newPosts.forEach(post => post.classList.remove('fade-in'));
+    }, 2000);
+});
+
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

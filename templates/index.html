@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="static/css/style.css">
+    </head>
+        <title>
+            Blockchain upload page
+        </title>
+        <body>
+                <header style="position: fixed; top: 0; height: 40px; width: 100% ; background-color: #333; color: #fff; padding: 10px;">
+                    <h2 style="margin: 0px; padding: 5px;">Welcome to Blockstagram</h2>
+                </header>
+            <center>      
+                <div class="container">
+                    <div class="definition">
+                        <h2>Blockchain defined:</h2>
+                        <p>Blockchain is a shared, immutable ledger that facilitates the process of recording transactions and tracking assets in a business network. An asset can be tangible (a house, car, cash, land) or intangible (intellectual property, patents, copyrights, branding).
+                        </p>
+                    </div>
+                    <div class="importance">
+                        <h2>Why blockchain is important:</h2>
+                        <p>Business runs on information. The faster it’s received and the more accurate it is, the better. Blockchain is ideal for delivering that information because it provides immediate, shared and completely transparent information stored on an immutable ledger that can be accessed only by permissioned network members. A blockchain network can track orders, payments, accounts, production and much more. And because members share a single view of the truth, you can see all details of a transaction end to end, giving you greater confidence, as well as new efficiencies and opportunities.</p>
+                    </div>
+                </div>
+                <div class="squares">  
+                    <div class="button-container">
+                        <button onclick="location.href='feed'" class="links" type="button">Feed</button>
+                        <button onclick="location.href='about'" class="links" type="button">Sing-up/Sign-in</button>
+                        {% block q %}
+                        <p>{{data}}</p>
+                        {% endblock q%}
+
+                    </div>
+                    
+                    
+                    <form action="/" enctype="multipart/form-data" method="post" class="squares">
+                        <center>
+                            <label for="newimg"class="btn">Select image:</label>
+                            <input type="file" id="newimg" name="newimg" accept="image/*">
+                            <input type="submit"class="btn">
+                        </center>
+                    </form>
+                    <div class="button-container">
+                        <button onclick="location.href='mine_block'" class="links" type="button" data-inline="true">
+                            Mine Block</button>
+                        <button onclick="location.href='get_chain'" class="links" type="button" data-inline="true">
+                            Get Chain</button>
+                        </div>
+                </div>
+
+            
+            </center>
+        </body>
+</html> 
